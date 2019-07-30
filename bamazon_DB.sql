@@ -23,22 +23,22 @@ CREATE TABLE products (
   VALUES ("Robo cops badge", "Accsesories", 15.00, 100);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("The Hockey Stick Putter", "Equipment", 76.50, 15)
+  VALUES ("The Hockey Stick Putter", "Equipment", 76.50, 15);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("Ant-Mans Van", "Vehicles", 1500.00, 1)
+  VALUES ("Ant-Mans Van", "Vehicles", 1500.00, 1);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("Infinity Gauntlet", "Gear", 450.25, 3)
+  VALUES ("Infinity Gauntlet", "Gear", 450.25, 3);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("Zeldas Ocarina", "Instuments", 300.00, 5)
+  VALUES ("Zeldas Ocarina", "Instuments", 300.00, 5);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("The Batmobile", "Vehicles", 900.00, 2)
+  VALUES ("The Batmobile", "Vehicles", 900.00, 2);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("Dr. Stranges Cape", "Gear", 120.00, 10)
+  VALUES ("Dr. Stranges Cape", "Gear", 120.00, 10);
 
   INSERT INTO products (product_name, department_name, price, stock_quantity)
-  VALUES ("Lokis Staff", "Gear", 370.90, 3)
+  VALUES ("Lokis Staff", "Gear", 370.90, 3);

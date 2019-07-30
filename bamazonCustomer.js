@@ -1,5 +1,5 @@
 var mysql = require("mysql");
-var inquierer = require("inquirer")
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -7,14 +7,37 @@ var connection = mysql.createConnection({
   user: "root",
   password: "password1",
   database: "bamazon_DB"
-  });
-
-connection.connect(function (err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-
-  console.log('connected as id ' + connection.threadId);
 });
+
+let sql = `SELECT * FROM products`;
+connection.query(sql, (results) => {
+  if (error) {
+    // return console.results(error.message);
+  
+  return console.log(results);
+  }
+});
+
+
+function start(){
+inquirer
+  .prompt([
+    {
+      name: 'id',
+      type: 'input',
+    message: 'Choose the ID of the product you want to buy?',
+    },
+    {
+      name: 'id',
+      type: 'input',
+      message: 'How many do you want?',
+    },
+  ])
+  .then(answer => {
+    
+    
+    console.log('test catch')
+  });
+}
+
 
