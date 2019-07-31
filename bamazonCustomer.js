@@ -1,6 +1,8 @@
+// required to run
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+// create connection to mysql
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -9,35 +11,54 @@ var connection = mysql.createConnection({
   database: "bamazon_DB"
 });
 
-let sql = `SELECT * FROM products`;
-connection.query(sql, (results) => {
-  if (error) {
-    // return console.results(error.message);
-  
-  return console.log(results);
-  }
+connection.connect(function (err, results) {
+  // message if errors
+  if (err) throw err;
+  console.log(err)
+  start()
 });
 
+// run question
+function start() { 
+  inquirer
+    .prompt([
+      {
+        name: 'id',
+        type: 'list',
+        message: 'Name of the product you want to buy?',
+        choices:[{
+          "Mr. Ts Gold Chain",
+          "IronMan Armor",
+          "Robo cops badge",
+          "The Hockey Stick Putter",
+          "Ant-Mans Van",
+          "Infinity Gauntlet",
+          "Zeldas Ocarina",
+          "The Batmobile",
+          "Dr. Stranges Cape",
+          "Lokis Staff", 
+      }
+    ]},
+      {
+        name: 'id',
+        type: 'input',
+        message: 'How many do you want?',
+      },
+    ])
+    .then(function (answer) {
+      switch (answer) {
+        case 1:
+          
+          break;
 
-function start(){
-inquirer
-  .prompt([
-    {
-      name: 'id',
-      type: 'input',
-    message: 'Choose the ID of the product you want to buy?',
-    },
-    {
-      name: 'id',
-      type: 'input',
-      message: 'How many do you want?',
-    },
-  ])
-  .then(answer => {
+          case 2:
+      
+        default:
+          break;
+      }
     
-    
-    console.log('test catch')
-  });
+      console.log('test catch')
+    });
 }
 
 
