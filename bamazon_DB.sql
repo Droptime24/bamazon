@@ -7,13 +7,10 @@ USE bamazon_DB;
 CREATE TABLE products (
   `id` INT AUTO_INCREMENT NOT NULL,
   `product_name` VARCHAR(45) NOT NULL,
-  `department_name` VARCHAR
-(45) NOT NULL,
-  `price` VARCHAR1
-(10) NOT NULL,
+  `department_name` VARCHAR(45) NOT NULL,
+  `price` VARCHAR(10) NOT NULL,
   `stock_quantity` INT,
-  PRIMARY KEY AUTO_INCREMENT
-(id)
+  PRIMARY KEY (id)
 );
 
 
@@ -68,6 +65,4 @@ INSERT INTO products
 VALUES
   ("Lokis Staff", "Gear", "$370.90", 3);
 
-SELECT *
-FROM bamazon_DB.products LIMIT
-0, 1000
+SELECT * FROM bamazon_DB.products;
