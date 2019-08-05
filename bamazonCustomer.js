@@ -1,9 +1,7 @@
-// required to run
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 var cTable = require("console.table");
 
-// create connection to mysql
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -13,59 +11,76 @@ var connection = mysql.createConnection({
 });
 
 connection.connect(function (err) {
-  // message if errors
   if (err) throw err;
   console.log("Welcome to Bamazon!");
   open();
 });
 
-// run question
 function open() {
-  connection.query(cTable = "SELECT * FROM products", function (err, results) {
+  connection.query(cTable = "SELECT * FROM products", function (err, res) {
     if (err) throw err;
-    console.table(results)
-
-  inquirer
-    .prompt([
-    
-      {
-        name: 'item_name',
-        type: 'rawlist',
-        message: 'Select the product you want to buy?',
-        choices: [
-          "Mr. Ts Gold Chain",
-          "IronMan Armor",
-          "Robo cops badge",
-          "The Hockey Stick Putter",
-          "Ant-Mans Van",
-          "Infinity Gauntlet",
-          "Zeldas Ocarina",
-          "The Batmobile",
-          "Dr. Stranges Cape",
-          "Lokis Staff",]
-      },
-      {
-        name: 'stock_quantity',
-        type: 'number',
-        message: 'How many would you like to buy?',
-      },
-    ])
-    .then(function (answer) {
-    // connection.query("UPDATE products SET ? WHERE ?", 
-    console.log(answer.item_name)
-    
-     
-
-      // console.log("-------------------------------")
-      // console.log("Selected Item: ", display.items)
-      // console.log("-------------------------------")
-      // console.log("Selected Item: ", display.inventory)
-      // console.log("-------------------------------")
-    
-    
-    });
+    console.table(res)
+    promtCust(res)
   })
-  }
+}
+function promtCust(res){
+    inquirer
+      .prompt([
 
+        {
+          name: 'product',
+          type: 'rawlist',
+          message: 'Select the product you want to buy?',
+          choices: [
+            "Mr. Ts Gold Chain",
+            "IronMan Armor",
+            "Robo cops badge",
+            "The Hockey Stick Putter",
+            "Ant-Mans Van",
+            "Infinity Gauntlet",
+            "Zeldas Ocarina",
+            "The Batmobile",
+            "Dr. Stranges Cape",
+            "Lokis Staff",]
+        },
+        {
+          name: 'quantity',
+          type: 'number',
+          message: 'How many would you like to buy?',
+        },
+      ])
+      .then(function (answer) {
+        console.log(answer)
+        var product;
+        for (var i = 0; i < res.length; i++) {
+          if (res[i].product_name === answer.product && res[i].stock_quantity >= answer.quantity) {
+            product = res[i];
+          }
+        }
+        if(product.stock_quantity >= answer.quantity){
+        console.log("Thank you for your business!")
+        updateDB(answer.product, answer.quantity);
+        }else{
+          console.log("Update quantity")
+          open();
+        }
+      });
+    }
+    
+    function updateDB(name, product){
+      connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?", 
+
+      [name, product],
+      
+      function(err, res){
+        console.log("test1", res)
+        
+      }
+
+      )
+      
+    }
+
+  
 
 

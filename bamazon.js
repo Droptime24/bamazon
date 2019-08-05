@@ -22,10 +22,10 @@ connection.connect(function (err) {
 // function viewProducts()
 function open() {
     connection.query("SELECT * FROM products", function (err, res) {
-        if (err) throw err;
-        console.log(res)
-
-      
+        if (err) throw err
+        var data = res;
+    })
+    
 }
 
 
