@@ -17,13 +17,11 @@ connection.connect(function (err) {
 });
 
 function open() {
-  connection.query(cTable = "SELECT * FROM products", function (err, res) {
+  connection.query(cTable = "SELECT * FROM products;", function (err, res) {
     if (err) throw err;
     console.table(res)
-    promtCust(res)
-  })
-}
-function promtCust(res){
+    // promtCust(res)
+    // function promtCust(res){
     inquirer
       .prompt([
 
@@ -50,37 +48,42 @@ function promtCust(res){
         },
       ])
       .then(function (answer) {
-        console.log(answer)
-        var product;
+
+        var products = answer;
         for (var i = 0; i < res.length; i++) {
-          if (res[i].product_name === answer.product && res[i].stock_quantity >= answer.quantity) {
-            product = res[i];
+          if (res[i].product_name === answer.product) {
+            products = res[i];
+            quantiy = res[i].stock_quantity;
+            price = res[i].pricc;
+            id = res[i].item_id;
           }
         }
-        if(product.stock_quantity >= answer.quantity){
-        console.log("Thank you for your business!")
-        updateDB(answer.product, answer.quantity);
-        }else{
+        if (products.stock_quantity >= answer.quantity) {
+          console.log("Thank you for your business!");
+          console.log("Product: ", answer.product_name);
+          console.log("Quantity: ", answer.stock_quantity);
+          console.log("Price: ", products.price);
+          updateDB(answer.product,
+            answer.quantity);
+        } else {
           console.log("Update quantity")
           open();
         }
       });
-    }
-    
-    function updateDB(name, product){
-      connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?", 
+  })
+}
+function updateDB(products, quantity) {
+  connection.query(`UPDATE products SET stock_quantity = stock_quantity - ? WHERE product_name = ?`,
+    [quantity, products],
 
-      [name, product],
-      
-      function(err, res){
-        console.log("test1", res)
-        
-      }
+    function (err, res) {
 
-      )
-      
-    }
+      console.log("updatedDB", res);
 
+      console.log(err);
+      open();
   
-
-
+      
+    }
+  );
+}
