@@ -20,10 +20,8 @@ function open() {
   connection.query(cTable = "SELECT * FROM products", function (err, res) {
     if (err) throw err;
     console.table(res)
-    promtCust(res)
-  })
-}
-function promtCust(res){
+    // promtCust(res)
+    // function promtCust(res){
     inquirer
       .prompt([
 
@@ -50,37 +48,45 @@ function promtCust(res){
         },
       ])
       .then(function (answer) {
-        console.log(answer)
-        var product;
+         
+        var products = answer;
         for (var i = 0; i < res.length; i++) {
-          if (res[i].product_name === answer.product && res[i].stock_quantity >= answer.quantity) {
-            product = res[i];
+          if (res[i].product_name === answer.product) {
+            products = res[i];
+            quantiy = res[i].stock_quantity;
+            price = res[i].price;
           }
         }
-        if(product.stock_quantity >= answer.quantity){
-        console.log("Thank you for your business!")
-        updateDB(answer.product, answer.quantity);
-        }else{
+        if (products.stock_quantity >= answer.quantity) {
+          console.log("Thank you for your business!");
+          console.log("Product: ", products.product_name);
+          console.log("Quantity: ", products.stock_quantity);
+          console.log("Price: ", products.price);
+          updateDB(answer.product,
+            answer.quantity);
+        } else {
           console.log("Update quantity")
           open();
         }
       });
-    }
+  })
+}
+function updateDB(products) {
+  connection.query(`UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?`,
+
+    [products],
     
-    function updateDB(name, product){
-      connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?", 
 
-      [name, product],
-      
-      function(err, res){
-        console.log("test1", res)
-        
-      }
+    function (err, res) {
+      console.log("test1", res)
 
-      )
-      
     }
 
-  
+  )
+
+}
 
 
+
+
+// && res[i].stock_quantity >= answer.quantity
