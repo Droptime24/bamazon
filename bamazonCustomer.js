@@ -54,14 +54,14 @@ function open() {
           if (res[i].product_name === answer.product) {
             products = res[i];
             quantiy = res[i].stock_quantity;
-            price = res[i].pricc;
+            price = res[i].price;
             id = res[i].item_id;
           }
         }
         if (products.stock_quantity >= answer.quantity) {
           console.log("Thank you for your business!");
-          console.log("Product: ", answer.product_name);
-          console.log("Quantity: ", answer.stock_quantity);
+          console.log("Product: ", products.product_name);
+          console.log("Quantity: ", products.stock_quantity);
           console.log("Price: ", products.price);
           updateDB(answer.product,
             answer.quantity);
@@ -78,12 +78,13 @@ function updateDB(products, quantity) {
 
     function (err, res) {
 
-      console.log("updatedDB", res);
+      console.log("Database Updated", res);
 
       console.log(err);
-      open();
-  
+
       
+      open()
+  
     }
   );
 }
