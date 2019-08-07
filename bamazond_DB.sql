@@ -8,7 +8,7 @@ CREATE TABLE products(
   item_id INT AUTO_INCREMENT NOT NULL, 
   product_name VARCHAR (100) NOT NULL,
   department_name VARCHAR (60) NULL,
-  money DECIMAL (13,4) NULL,
+  price DECIMAL (13,4) NULL,
   stock_quantity INT NULL, 
   PRIMARY KEY (item_id) 
 );
@@ -17,61 +17,61 @@ CREATE TABLE products(
   INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
-  VALUES("Mr. Ts Gold Chain", "Accsesories", "$60.00", 20);
+  VALUES("Mr. Ts Gold Chain", "Accsesories", 60.00, 20);
 
   
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
-  VALUES("IronMan Armor", "Gear", "$5,000.00", 10);
+  VALUES("IronMan Armor", "Gear", 5000.00, 10);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("Robo cops badge", "Accsesories", "$15.00", 100);
+    ("Robo cops badge", "Accsesories", 15.00, 100);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("The Hockey Stick Putter", "Equipment", "$76.50", 15);
+    ("The Hockey Stick Putter", "Equipment", 76.50, 15);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("Ant-Mans Van", "Vehicles", "$1,500.00", 1);
+    ("Ant-Mans Van", "Vehicles", 1500.00, 1);
   
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("Infinity Gauntlet", "Gear", "$450.25", 3);
+    ("Infinity Gauntlet", "Gear", 450.25, 3);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("Zeldas Ocarina", "Instuments", "$300.00", 5);
+    ("Zeldas Ocarina", "Instuments", 300.00, 5);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("The Batmobile", "Vehicles", "$900.00", 2);
+    ("The Batmobile", "Vehicles", 900.00, 2);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("Dr. Stranges Cape", "Gear", "$120.00", 10);
+    ("Dr. Stranges Cape", "Gear", 120.00, 10);
 
 INSERT INTO products
   (product_name, department_name, price, stock_quantity)
 
   VALUES
-    ("Lokis Staff", "Gear", "$370.90", 3);
+    ("Lokis Staff", "Gear", 370.90, 3);
 
-SELECT * FROM bamazon_DB.products;
+SELECT * FROM products;
 
