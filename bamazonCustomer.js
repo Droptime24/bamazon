@@ -6,7 +6,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
-  password: "password1",
+  password: "password1", 
   database: "bamazon_DB"
 });
 
@@ -76,9 +76,8 @@ function open() {
         } else {
           console.log("Please update your quantity, supplies are low.");
           console.log("======================================================================");
-          open()
         }
-
+        
        
       });
   })
